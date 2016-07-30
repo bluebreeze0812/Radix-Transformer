@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transfomation</title>
+		<meta charset="utf-8">
+		<style>
+			.from_div, .to_div, .button_div {
+				width: 100%;
+				text-align: center;
+				position: relative;
+				top: 50px;
+				bottom: 50px;
+			}
+			
+			button {
+				position: relative;
+				left: 90px;
+				background-color: #4CAF50;
+				border: none;
+				color: #F9F9F9;
+				width: 75px;
+				height: 40px;
+				transition: all 0.4s;
+				-webkit-transition: all 0.4s;
+			}
+			
+			button:hover {
+				background-color: #FFFFFF;
+				color: #4CAF50;
+				box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1) inset, 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+				cursor: pointer;
+			}
+			
+			#clear {
+				position: relative;
+				left: -80px;
+				background-color: #d92626;
+				border: none;
+				color: #F9F9F9;
+				width: 75px;
+				height: 40px;
+				transition: all 0.4s;
+				-webkit-transition: all 0.4s;
+			}
+			
+			#clear:hover {
+				background-color: #FFFFFF;
+				color: #d92626;
+				box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1) inset, 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+				cursor: pointer;
+			}
+			
+			input[type=text] {
+				width: 200px;
+				height: 30px;
+				transition: width 0.4s;
+				-webkit-transition: width 0.4s;
+				font-family: Arial,Verdana,Sans-serif;
+				font-size: 110%;
+			}
+			
+			input[type=text]:focus {
+				width: 400px;
+			}
+			
+			.menufolder {
+				height: 33px;
+			}
+		</style>
+		
+		<script>
+			function transfer(val) {
+				var from_formation = document.getElementsByName("formation").item(0).value;
+				var to_formation = document.getElementsByName("formation").item(1).value;
+				var result = genius(from_formation, val, to_formation);
+				document.getElementById("to").value = result;
+			}
+			
+			function reverse_transfer(val) {
+				var from_formation = document.getElementsByName("formation").item(1).value;
+				var to_formation = document.getElementsByName("formation").item(0).value;
+				var result = genius(from_formation, val, to_formation);
+				document.getElementById("from").value = result;
+			}
+			
+			function genius(from, val, to) {
+				from = parseInt(from);
+				to = parseInt(to);
+				val = parseInt(val, from);
+				val = val.toString(to);
+				return val;
+			}
+			
+			function clear_input() {
+				document.getElementById("from").value = "";
+				document.getElementById("to").value = "";
+			}
+		</script>
+	</head>
+	<body>
+		<div class="from_div">
+			<select name="formation" id="formation" class="menufolder">
+				<option value="2">2</option>
+				<option value="8">8</option>
+				<option value="10">10</option>
+				<option value="16">16</option>
+			</select>
+			<input type="text" name="from" id="from" placeholder="Input number..." onkeyup="transfer(this.value);">
+		</div>
+		<br>
+		<div class="button_div">
+			<button name="clear" id="clear" onclick="clear_input()">CLEAR</button>
+			<button name="confirm" id="confirm" onclick="transfer(document.getElementById('from').value);">GO</button>
+		</div>
+		<br>
+		<div class="to_div">
+			<select name="formation" id="formation" class="menufolder">
+				<option value="2">2</option>
+				<option value="8">8</option>
+				<option value="10">10</option>
+				<option value="16">16</option>
+			</select>
+			<input type="text" name="to" id="to" placeholder="Input number..." onkeyup="reverse_transfer(this.value);">
+		</div>
+	</body>
+</html>
